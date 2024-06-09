@@ -4,12 +4,12 @@ const User = require('../models/User');
 //create New cOurse
 exports.createCourse = async (req, res) => {
   const { title, description } = req.body;
-
+console.log(req.token.user.id);
   try {
     const newCourse = new Course({
       title,
       description,
-      teacher: req.user.id,
+      teacher: req.token.user.id,
     });
 
     const course = await newCourse.save();
@@ -32,11 +32,11 @@ exports.getCourses = async (req, res) => {
 };
 
 
-// get enrolled courses by user
+// enroll to courses by user
 exports.enrollCourse = async (req, res) => {
     try {
         const courseId = req.params.id;
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.token.user.id);
 
         if (user.enrolledCourses.includes(courseId)) {
             return res.status(400).json({ msg: 'Already enrolled in this course' });
@@ -52,3 +52,18 @@ exports.enrollCourse = async (req, res) => {
     }
 };
 
+//enrolled courses by user
+exports.getEnrolledCourses = async (req, res) => {
+    try {
+        const user = await User.findById(req.token.user.id).populate('enrolledCourses');
+
+        if (!user) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
+        res.json(user.enrolledCourses);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};
