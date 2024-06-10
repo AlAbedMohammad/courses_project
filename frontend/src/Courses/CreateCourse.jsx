@@ -8,7 +8,6 @@ const CreateCourse = () => {
     const { user } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
-        console.log(user.token);
         e.preventDefault();
        try {
         await axios.post('http://localhost:5000/api/courses/create', { title, description },{

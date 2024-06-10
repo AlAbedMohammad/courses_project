@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 
 const authentication = (req, res, next) => {
   try {
-    console.log(req.headers);
     if (!req.headers.authorization) {
       return res.status(403).json({
         success: false,
@@ -23,7 +22,6 @@ const authentication = (req, res, next) => {
       }
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json({
       success: false,
       message: `Server Error from auth`,

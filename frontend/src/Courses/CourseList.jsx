@@ -5,7 +5,6 @@ import { AuthContext } from '../context/AuthContext';
 const CourseList = () => {
     const { user } = useContext(AuthContext);
     const [courses, setCourses] = useState([]);
-console.log(user);
     useEffect(() => {
         const fetchCourses = async () => {
             const response = await axios.get('http://localhost:5000/api/courses');

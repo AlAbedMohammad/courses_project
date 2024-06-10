@@ -22,7 +22,6 @@ const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         const response = await axios.post('http://localhost:5000/api/login', { email, password });
         localStorage.setItem('token', response.data.token);
-        console.log(response.data.payload.user);
       
         setUser(response.data);
     };

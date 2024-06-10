@@ -37,7 +37,6 @@ exports.enrollCourse = async (req, res) => {
     try {
       const courseId = req.params.id;
       const user = await User.findById(req.token.user.id);
-  console.log(user);
       if (user.enrolledCourses.includes(courseId)) {
         return res.status(400).json({ msg: 'Already enrolled in this course' });
       }
