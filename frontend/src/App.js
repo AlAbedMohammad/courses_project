@@ -7,6 +7,7 @@ import Navbar from './Layout/Navbar';
 import "./app.css"
 import CourseList from './Courses/CourseList';
 import CreateCourse from './Courses/CreateCourse';
+import EnrolledCourses from './Courses/EnrolledCourses';
 function App() {
     return (
         <AuthProvider>
@@ -18,6 +19,7 @@ function App() {
                             <Route path="/login" element={<Login/>} />
                             <Route path="/register" element={<Register/>} />
                             <Route path="/create-course" element={<CreateCourse/>} />
+                            <Route path="/enrolled-courses" element={<EnrolledCourses/>} />
                         </Routes>
                     </div>
 
