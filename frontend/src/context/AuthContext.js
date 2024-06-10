@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('token');
         if (token) {
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            axios.get('/api/auth/me').then(response => {
+            axios.get('http://localhost:5000/api/auth/me').then(response => {
                 setUser(response.data);
             }).catch(() => {
                 localStorage.removeItem('token');
@@ -22,17 +22,16 @@ const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         const response = await axios.post('http://localhost:5000/api/login', { email, password });
         localStorage.setItem('token', response.data.token);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-        const userResponse = await axios.get('/api/auth/me');
-        setUser(userResponse.data);
+        console.log(response.data.payload.user);
+      
+        setUser(response.data.payload.user);
     };
 
     const register = async (name, email, password, role) => {
         const response = await axios.post('http://localhost:5000/api/register', { name, email, password, role });
         localStorage.setItem('token', response.data.token);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-        const userResponse = await axios.get('/api/auth/me');
-        setUser(userResponse.data);
+     
+        setUser(response.data.payload.user);
     };
 
     const logout = () => {
