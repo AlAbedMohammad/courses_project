@@ -12,9 +12,9 @@ const Navbar = () => {
             <div>
                 {user ? (
                     <>
-                        {user.role === 'teacher' && <Link to="/create-course" className="text-white mr-4">Create Course</Link>}
+                        {user.payload.user.role === 'teacher' && <Link to="/create-course" className="text-white mr-4">Create Course</Link>}
                         <button onClick={logout} className="text-white bg-red-500 hover:bg-red-600 py-2 px-4 rounded">Logout</button>
-                        {user.role === 'student' && (
+                        {user.payload.user.role === 'student' && (
                             <Link to="/enrolled-courses" className="text-white ml-4">Enrolled Courses</Link>
                         )}
                     </>

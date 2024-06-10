@@ -24,14 +24,14 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem('token', response.data.token);
         console.log(response.data.payload.user);
       
-        setUser(response.data.payload.user);
+        setUser(response.data);
     };
 
     const register = async (name, email, password, role) => {
         const response = await axios.post('http://localhost:5000/api/register', { name, email, password, role });
         localStorage.setItem('token', response.data.token);
      
-        setUser(response.data.payload.user);
+        setUser(response.data);
     };
 
     const logout = () => {

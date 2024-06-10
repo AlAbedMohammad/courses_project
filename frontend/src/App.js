@@ -5,6 +5,7 @@ import Register from './Auth/Register';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './Layout/Navbar';
 import "./app.css"
+import CourseList from './Courses/CourseList';
 function App() {
     return (
         <AuthProvider>
@@ -12,11 +13,12 @@ function App() {
                       <Navbar/>
                     <div className="container">
                         <Routes>
+                            <Route path="/" element={<CourseList/>} />
                             <Route path="/login" element={<Login/>} />
                             <Route path="/register" element={<Register/>} />
                         </Routes>
                     </div>
-                    
+
                 </div>
       
         </AuthProvider>

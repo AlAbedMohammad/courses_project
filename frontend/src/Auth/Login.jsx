@@ -2,10 +2,9 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
-    const  {login,user}  = useContext(AuthContext);
+    const  {login}  = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-console.log(user);
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
