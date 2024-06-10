@@ -15,9 +15,8 @@ console.log(user);
     }, []);
 
     const enrollCourse = async (courseId) => {
-        console.log(user.payload);
         try {
-            await axios.post(`http://localhost:5000/api/courses/enroll/${courseId}`,{
+            await axios.post(`http://localhost:5000/api/courses/enroll/${courseId}`,{},{
                 headers: {
                   authorization: `Bearer ${user.token}`,
                 },

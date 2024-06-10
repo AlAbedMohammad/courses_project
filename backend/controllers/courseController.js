@@ -3,22 +3,22 @@ const User = require('../models/User');
 
 //create New cOurse
 exports.createCourse = async (req, res) => {
-  const { title, description } = req.body;
-console.log(req.token.user.id);
-  try {
-    const newCourse = new Course({
-      title,
-      description,
-      teacher: req.token.user.id,
-    });
-
-    const course = await newCourse.save();
-    res.json(course);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Server error");
-  }
-};
+    const { title, description } = req.body;
+    const teacher = req.token.user.id;
+    try {
+      const newCourse = new Course({
+        title,
+        description,
+        teacher,
+      });
+  
+      const course = await newCourse.save();
+      res.json(course);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Server error");
+    }
+  };
 
 //to get all courses
 exports.getCourses = async (req, res) => {
@@ -35,22 +35,22 @@ exports.getCourses = async (req, res) => {
 // enroll to courses by user
 exports.enrollCourse = async (req, res) => {
     try {
-        const courseId = req.params.id;
-        const user = await User.findById(req.token.user.id);
-
-        if (user.enrolledCourses.includes(courseId)) {
-            return res.status(400).json({ msg: 'Already enrolled in this course' });
-        }
-
-        user.enrolledCourses.push(courseId);
-        await user.save();
-
-        res.json(user);
+      const courseId = req.params.id;
+      const user = await User.findById(req.token.user.id);
+  console.log(user);
+      if (user.enrolledCourses.includes(courseId)) {
+        return res.status(400).json({ msg: 'Already enrolled in this course' });
+      }
+  
+      user.enrolledCourses.push(courseId);
+      await user.save();
+  
+      res.json(user);
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
+      console.error(err.message);
+      res.status(500).send('Server error');
     }
-};
+  };
 
 //enrolled courses by user
 exports.getEnrolledCourses = async (req, res) => {
